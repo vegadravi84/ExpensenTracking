@@ -1,0 +1,126 @@
+<form #f="ngForm" name="form" (ngSubmit)=" f.form.valid && onSubmit( )">
+
+    <div>
+      <label for="firstname">First Name</label>
+      <input type="text" name="firstname"  [(ngModel)]="form.firstname"
+      required
+      #firstname="ngModel"
+      [ngClass]="{ 'is-invalid': f.submitted && firstname.errors }">
+      <div *ngIf="f.submitted && firstname.errors" class="invalid-feedback">
+        <div *ngIf="firstname.errors['required']">First Name is required</div>
+      </div>
+    </div>
+   
+    <div>
+      <label for="lastname">Last Name</label>
+      <input type="text" name="lastname" [(ngModel)] = "form.lastname" required #lastname="ngModel"[ngClass]="{ 'is-invalid': f.submitted && lastname.errors }">
+      <div *ngIf="f.submitted && lastname.errors" class="invalid-feedback">
+        <div *ngIf="lastname.errors['required']">last Name is required</div>
+      </div>
+    </div>
+    <div>
+        <label for="lastname">Surname</label>
+        <input type="text" name="surname" [(ngModel)] = "form.surname" required #surname="ngModel" [ngClass]="{ 'is-invalid': f.submitted && surname.errors }">
+        <div *ngIf="f.submitted && surname.errors" class="invalid-feedback">
+            <div *ngIf="surname.errors['required']">Surname is required</div>
+          </div>
+    </div>
+     
+    <div >
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.errors }"/>
+        <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+          <div *ngIf="email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors['email']">Email is invalid</div>
+        </div>
+      </div>
+    <div>
+        <label for="email">Mobile </label>
+        <input type="text" id="mobile" name="mobile" [pattern]="mobNumberPattern"  [(ngModel)]="form.mobile" required #mobile="ngModel" [ngClass]="{ 'is-invalid': f.submitted && mobile.errors }" />
+        <div *ngIf="f.submitted && mobile.errors" class="invalid-feedback">
+            <div *ngIf="mobile.errors['required']">mobile is required</div>
+            <div *ngIf="mobile.errors['pattern']">mobile is invalid</div>
+          </div>
+    </div>
+    <div>
+      <label for="gender">Geneder</label>
+      <input type="radio" value="male" name="gender"  #gender="ngModel" [(ngModel)]="form.gender" required [ngClass]="{ 'is-invalid': f.submitted && gender.errors }" > Male
+      <input type="radio" value="female" name="gender" #gender="ngModel" [(ngModel)]="form.gender" required [ngClass]="{ 'is-invalid': f.submitted && gender.errors }" > Female
+      <!-- /<div *ngIf="f.submitted && !f.controls['gender'].errors">Please select a gender.</div> -->
+      <div *ngIf="f.submitted && gender.errors && !gender.valid">
+        <div *ngIf="gender.errors?.['required']">Please select a gender.</div>
+      </div>
+    </div>
+   
+    <div>
+      <label for="Traveling">Hobbies</label>
+      <div for="Traveling">
+          <input type="checkbox" name="Traveling" #selectedHobbies="ngModel" [(ngModel)]="form.selectedHobbies"  [ngClass]="{ 'is-invalid': f.submitted && selectedHobbies.errors }"> Traveling
+      </div>
+      <div for="music">
+          <input type="checkbox" name="music" #selectedHobbies="ngModel" [(ngModel)]="form.selectedHobbies1"  [ngClass]="{ 'is-invalid': f.submitted && selectedHobbies.errors }"> Music
+      </div>
+      <div for="dancing">
+          <input type="checkbox" name="dancing" #selectedHobbies="ngModel" [(ngModel)]="form.selectedHobbies2"    [ngClass]="{ 'is-invalid': f.submitted && selectedHobbies.errors }"> Dance
+      </div>
+      <div *ngIf="f.submitted && selectedHobbies.errors && !selectedHobbies.valid">
+        <div *ngIf="selectedHobbies.errors?.['required']">Please select a hobbies.</div>
+      </div>
+    </div>
+    <div>
+        <label>Contry</label>
+        <select name="country"  #contry="ngModel" [(ngModel)]="form.contry" required [ngClass]="{ 'is-invalid': f.submitted && contry.errors }">
+            <option  selected > Select Country</option>
+            <option value="US">US</option>
+            <option value="UK">UK</option>
+            <option value="india">India</option>
+            <option value="Austriliya">Austrliya</option>
+        </select>
+        <div *ngIf="f.submitted && contry.errors ">
+            <div *ngIf="contry.errors?.['required']">Please select a contry.</div>
+          </div>
+    </div>
+    <p>
+      <button type="submit" *ngIf="isShownNextButton">Submit</button>
+    </p>
+    <p>
+        <button type="submit" *ngIf="!isShownNextButton" >Update</button>
+    </p>
+    <p>
+        <button type="reset"  (click)="resetForm(f)">Reset</button>
+    </p>
+   
+</form>
+<p-table [value]="FormData" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>First Name</th>
+            <th>LastName</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Gender</th>
+            <th>Traveling</th>
+            <th>Music</th>
+            <th>Dancing</th>
+            <th>Country</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-rowIndex="rowIndex" >
+        <tr >
+            <td>{{ product.firstname }}</td>
+            <td>{{ product.lastname }}</td>
+            <td>{{ product.surname }}</td>
+            <td>{{ product.email }}</td>
+            <td>{{ product.mobile }}</td>
+            <td>{{ product.gender }}</td>
+            <td>{{ product.selectedHobbies ? 'Traveling':'' }}</td>
+            <td>{{ product.selectedHobbies1 ? 'Music':'' }}</td>
+            <td>{{ product.selectedHobbies2 ? 'Dancing':''}}</td>
+            <td>{{ product.contry }}</td>
+            <td><button (click)="Edit(rowIndex)"> Edit</button></td>
+            <td><button (click)="Delete(rowIndex)"> Delete</button></td>
+        </tr>
+    </ng-template>
+</p-table>
+   

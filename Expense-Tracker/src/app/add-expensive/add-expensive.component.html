@@ -1,0 +1,56 @@
+<div class="main-containe">
+    <div>
+        <div class="register-form">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label>Lable*</label>
+                <input
+                  type="text"
+                  formControlName="lableAmount"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['lableAmount'].errors }"
+                />
+                <div *ngIf="submitted && f['lableAmount'].errors" class="invalid-feedback">
+                  <div *ngIf="f['lableAmount'].errors['required']">Lable is required</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Amount*</label>
+                <input
+                  type="text"
+                  formControlName="amount"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['amount'].errors }"
+                />
+                <div *ngIf="submitted && f['amount'].errors" class="invalid-feedback">
+                  <div *ngIf="f['amount'].errors['required']">Amount is required</div>
+                </div>
+              </div>
+              <div class="ui-categories">
+                  <label>Selected Categories</label><br/>
+                  <select class="custom-select"  formControlName="selectedcategories" (change)="changeExpense($event)">
+                  <!-- <option value="">Choose your Categories</option> -->
+                  <option *ngFor="let income of categories;let i = index;" [value]="f['selectedcategories'] ? income:i"  [ngClass]="{ 'is-invalid': submitted && f['selectedcategories'].errors }">{{income}}</option>
+
+                  </select>
+                  <div *ngIf="submitted && f['selectedcategories'].errors" class="invalid-feedback">
+                    <div *ngIf="f['selectedcategories'].errors['required']">Lable is required</div>
+                  </div>
+              </div>
+              <div class="btn-form">
+                <div class="form-group ">
+                        <button type="submit" class="btn btn-primary">Add Expensive</button>
+                        <button  type="button" class="btn btn-danger float-right" (click)="removeCategorie()">Remove Categories</button>
+                        <!-- <button type="button" (click)="onReset()" class="btn btn-warning float-right">Reset</button> -->
+                  </div>
+              </div>
+            </form>
+          </div>
+    </div>
+    <div class="ui-categories">
+      <h3>Reset Your Expense</h3>
+      <h4>Reset your Expense is 0</h4>
+      <button type="button" (click)="onReset()" class="btn btn-danger float-right">Reset</button>
+    </div>
+</div>

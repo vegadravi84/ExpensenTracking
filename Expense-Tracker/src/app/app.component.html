@@ -1,0 +1,27 @@
+
+<!-- <router-outlet></router-outlet> -->
+<div class="page has-sidebar">
+  <header class="page-header">
+    Expense Tracking App 
+  </header>
+   
+  <aside class="page-aside">
+    <div class="sidenav-parent">
+      <div class="sidenav-child"><a routerLink="home"><i class="pi pi-home"></i>Home</a></div>
+      <div class="sidenav-child"><a routerLink="addExpensive" ><i class="pi pi-plus-circle"></i>Add ad Expense</a></div>
+      <div class="sidenav-child"><a routerLink="budget"><i class="pi pi-dollar"></i>Add/Update Your Expense</a></div>
+      <div class="sidenav-child"><a routerLink="template-driven"><i class="pi pi-dollar"></i>Template Driven form</a></div>
+      <div class="sidenav-child"><a routerLink="categories"><i class="pi pi-plus-circle"></i>View Panding Categories</a></div>
+      <div class="sidenav-child"><a routerLink="googleform"><i class="pi pi-plus-circle"></i>Login Page with Google</a></div>
+    </div>
+  </aside>
+
+  <main class="page-main">
+    <div class="article">
+  
+
+        <router-outlet></router-outlet>
+    </div>
+  </main>
+
+</div>

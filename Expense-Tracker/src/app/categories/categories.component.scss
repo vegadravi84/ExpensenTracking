@@ -1,0 +1,33 @@
+.mid-header{
+    display: flex;
+}
+.card {
+    transition: 0.3s;
+    width: 33%;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #121212; 
+  }
+  .container {
+     padding: 0px 98px;
+  }
+  .md-income{
+    font-weight: bold;
+    font-size: medium;
+  }
+  .md-price{
+    padding-top: 10px;
+    font-size: medium;
+    color: #90EE90;
+  }
+  .card-table{
+    width: 39%;
+    margin-top: 50px;
+    margin-left: 92px;
+    padding: 10px;
+    background-color: #121212; 
+  }
+  .mid-header1{
+    display: flex;
+    margin-top: 10px;
+  }
